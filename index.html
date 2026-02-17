@@ -3362,8 +3362,14 @@
         const goldClose = document.getElementById('popup2Close');
         let goldShown = false;
 
+        const vslVideoEl = document.getElementById('vslVideo');
+
+        function isVideoPlaying() {
+            return vslVideoEl && !vslVideoEl.paused && !vslVideoEl.ended && vslVideoEl.readyState > 2;
+        }
+
         function showRedPopup() {
-            if (redShown) return;
+            if (redShown || isVideoPlaying()) return;
             redShown = true;
             redPopup.classList.add('active');
         }
@@ -3373,6 +3379,7 @@
         }
 
         function showGoldPopup() {
+            if (isVideoPlaying()) return;
             goldPopup.classList.add('active');
         }
 
@@ -3399,10 +3406,10 @@
             }, { passive: true });
         }
 
-        // Gold popup triggers — every 30 seconds
+        // Gold popup triggers — every 15 seconds
         setInterval(() => {
             if (!goldPopup.classList.contains('active')) showGoldPopup();
-        }, 30000);
+        }, 15000);
 
         // Red popup fallback — 60 seconds
         setTimeout(() => {
