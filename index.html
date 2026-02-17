@@ -1,0 +1,3814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>QFS License Card</title>
+    <meta property="og:image" content="cardfront.png">
+    <meta property="og:title" content="QFS License Card — Protect Your Savings Before March 1st">
+    <meta property="og:description" content="Trump's QFS system is going live. Get your License Card before the Federal Reserve seizes everything.">
+    <link rel="icon" type="image/png" href="qfslogosajt.png">
+    <link rel="apple-touch-icon" href="qfslogosajt.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --void: #030810;
+            --abyss: #061022;
+            --gold-bright: #00b4d8;
+            --gold-dim: #0a7ea4;
+            --gold-glow: #22d3ee;
+            --bone: #dce8f0;
+            --ash: #6e8494;
+            --ember: #c23c2a;
+            --green: #28a745;
+            --timer-glow: rgba(0, 180, 216, 0.15);
+        }
+
+        html { font-size: 16px; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--void);
+            color: var(--bone);
+            font-family: 'Crimson Text', Georgia, serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- Atmospheric Background --- */
+        .atmosphere {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0, 180, 216, 0.04) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 80% at 50% 100%, rgba(0, 100, 180, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(6, 16, 34, 0.9) 0%, var(--void) 70%);
+        }
+
+        /* --- Scanlines --- */
+        .scanlines {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.03) 2px,
+                rgba(0, 0, 0, 0.03) 4px
+            );
+        }
+
+        /* --- Vertical Threat Line --- */
+        .threat-line {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            width: 1px;
+            height: 100vh;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(0, 180, 216, 0.08) 20%,
+                rgba(0, 180, 216, 0.15) 50%,
+                rgba(0, 180, 216, 0.08) 80%,
+                transparent 100%
+            );
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* --- Alert Bar --- */
+        .alert-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            background: linear-gradient(90deg, var(--void), rgba(194, 60, 42, 0.1), var(--void));
+            border-bottom: 1px solid rgba(194, 60, 42, 0.3);
+            padding: 0.55rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .alert-bar::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(194, 60, 42, 0.15), transparent);
+            animation: alert-bar-flash 3s ease-in-out infinite;
+            will-change: opacity;
+            pointer-events: none;
+        }
+
+        @keyframes alert-bar-flash {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .alert-bar-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--ember);
+            border-radius: 50%;
+            flex-shrink: 0;
+            animation: dot-flash 1.8s ease-in-out infinite;
+            will-change: opacity;
+        }
+
+        @keyframes dot-flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .alert-bar-live {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.55rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            color: #fff;
+            background: var(--ember);
+            padding: 0.15rem 0.5rem;
+            border-radius: 2px;
+            animation: dot-flash 1.5s ease-in-out infinite;
+            text-transform: uppercase;
+            will-change: opacity;
+        }
+
+        .alert-bar-text {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            color: var(--ember);
+            text-transform: uppercase;
+        }
+
+        /* --- Scan Light --- */
+        .scan-light {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 20%, rgba(0, 180, 216, 0.35) 50%, transparent 80%);
+            z-index: 5;
+            pointer-events: none;
+            animation: scan-move 6s linear infinite;
+            will-change: transform, opacity;
+        }
+
+        @keyframes scan-move {
+            0% { transform: translateY(0); opacity: 0; }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        /* --- Gold Star Particles --- */
+        .particles-container {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        .particle--star {
+            background: radial-gradient(circle, var(--gold-glow) 0%, var(--gold-bright) 40%, transparent 70%);
+            box-shadow: 0 0 6px 1px rgba(34, 211, 238, 0.3);
+            animation: star-drift linear forwards;
+        }
+
+        .particle--twinkle {
+            background: var(--gold-glow);
+            box-shadow: 0 0 4px 1px rgba(34, 211, 238, 0.4);
+            animation: star-twinkle ease-in-out infinite;
+        }
+
+        @keyframes star-drift {
+            0% { transform: translate(0, 0) scale(0); opacity: 0; }
+            8% { opacity: 0.7; transform: translate(var(--dx1), var(--dy1)) scale(1); }
+            50% { opacity: 0.4; }
+            92% { opacity: 0.6; }
+            100% { transform: translate(var(--dx2), var(--dy2)) scale(0); opacity: 0; }
+        }
+
+        @keyframes star-twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            20% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 0.15; transform: scale(0.8); }
+            80% { opacity: 0.5; transform: scale(1.1); }
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .warning-beacon {
+            width: 6px;
+            height: 6px;
+            background: var(--ember);
+            border-radius: 50%;
+            margin-bottom: 3rem;
+            position: relative;
+            animation: beacon-pulse 3s ease-in-out infinite;
+            will-change: opacity;
+        }
+
+        .warning-beacon::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border: 1px solid var(--ember);
+            border-radius: 50%;
+            animation: beacon-ring 3s ease-in-out infinite;
+            will-change: transform, opacity;
+        }
+
+        @keyframes beacon-pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes beacon-ring {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(2.5); opacity: 0; }
+        }
+
+        .headline {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(2.4rem, 6.5vw, 5.5rem);
+            line-height: 1.05;
+            letter-spacing: 0.04em;
+            color: var(--bone);
+            max-width: 900px;
+            margin-bottom: 3rem;
+            position: relative;
+            opacity: 0;
+            animation: text-manifest 1.2s ease-out 0.3s forwards, subtle-flicker 8s ease-in-out 3s infinite;
+            will-change: opacity, transform;
+        }
+
+        .headline .highlight {
+            color: var(--gold-bright);
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        .typewriter-line {
+            display: inline;
+        }
+
+        .typewriter-cursor::after {
+            content: '|';
+            animation: cursor-blink 0.6s step-end infinite;
+            color: var(--gold-bright);
+            font-weight: 100;
+            margin-left: 2px;
+        }
+
+        @keyframes cursor-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* --- LICENSE CARD highlight + old TV glitch effect --- */
+        .tw-keyword {
+            color: var(--gold-glow);
+            position: relative;
+            display: inline;
+            text-shadow:
+                0 0 12px rgba(34, 211, 238, 0.6),
+                0 0 30px rgba(0, 180, 216, 0.3);
+        }
+
+        /* RGB chromatic aberration on each character flash */
+        .tw-keyword.flash {
+            animation: keyword-glitch-char 0.15s steps(2) forwards;
+        }
+
+        @keyframes keyword-glitch-char {
+            0% {
+                text-shadow:
+                    -2px 0 #ff0040,
+                    2px 0 #0ff,
+                    0 0 20px rgba(34, 211, 238, 1),
+                    0 0 50px rgba(0, 180, 216, 0.7);
+                filter: brightness(2.5);
+                transform: translateX(-1px);
+            }
+            50% {
+                text-shadow:
+                    2px 0 #ff0040,
+                    -2px 0 #0ff,
+                    0 0 15px rgba(34, 211, 238, 0.8);
+                filter: brightness(1.8);
+                transform: translateX(1px);
+            }
+            100% {
+                text-shadow:
+                    0 0 12px rgba(34, 211, 238, 0.6),
+                    0 0 30px rgba(0, 180, 216, 0.3);
+                filter: brightness(1);
+                transform: translateX(0);
+            }
+        }
+
+        /* Word-level TV shake */
+        .tw-keyword.tv-shake {
+            display: inline-block;
+            animation: tw-word-shake 0.12s steps(2) forwards;
+        }
+
+        @keyframes tw-word-shake {
+            0% { transform: translate(0, 0) skewX(0); }
+            25% { transform: translate(-3px, 1px) skewX(-0.8deg); }
+            50% { transform: translate(2px, -1px) skewX(0.5deg); }
+            75% { transform: translate(-1px, 0) skewX(-0.3deg); }
+            100% { transform: translate(0, 0) skewX(0); }
+        }
+
+        /* Word-level CRT scanlines via ::before */
+        .tw-keyword::before {
+            content: '';
+            position: absolute;
+            inset: -4px -6px;
+            pointer-events: none;
+            opacity: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 255, 255, 0.07) 2px,
+                rgba(0, 255, 255, 0.07) 4px
+            );
+            mix-blend-mode: screen;
+            z-index: 1;
+        }
+
+        .tw-keyword.tv-lines::before {
+            animation: tw-scanlines 0.2s steps(2) forwards;
+        }
+
+        @keyframes tw-scanlines {
+            0% { opacity: 1; background-position: 0 0; }
+            50% { opacity: 0.7; background-position: 0 1px; }
+            100% { opacity: 0; }
+        }
+
+        /* Word-level static noise via ::after */
+        .tw-keyword::after {
+            content: '';
+            position: absolute;
+            inset: -4px -6px;
+            pointer-events: none;
+            opacity: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            background-size: 80px;
+            mix-blend-mode: overlay;
+            z-index: 2;
+        }
+
+        .tw-keyword.tv-static::after {
+            animation: tw-static 0.15s steps(3) forwards;
+        }
+
+        @keyframes tw-static {
+            0% { opacity: 0.35; }
+            33% { opacity: 0.15; background-position: 20px 10px; }
+            66% { opacity: 0.3; background-position: -15px -8px; }
+            100% { opacity: 0; }
+        }
+
+        /* Hide pseudo-elements once glow pulse takes over */
+        .tw-keyword.complete::before,
+        .tw-keyword.complete::after {
+            display: none;
+        }
+
+        /* Persistent glow pulse after keyword is fully typed */
+        .tw-keyword.complete {
+            animation: keyword-glow-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes keyword-glow-pulse {
+            0%, 100% {
+                text-shadow:
+                    0 0 10px rgba(34, 211, 238, 0.5),
+                    0 0 25px rgba(0, 180, 216, 0.2);
+            }
+            50% {
+                text-shadow:
+                    0 0 18px rgba(34, 211, 238, 0.8),
+                    0 0 40px rgba(0, 180, 216, 0.4),
+                    0 0 60px rgba(0, 180, 216, 0.15);
+            }
+        }
+
+        .headline .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            width: calc(100% + 36px);
+            transform: translateX(-50%);
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+        }
+
+        .divider {
+            display: none;
+        }
+
+        .subheadline {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: clamp(1.05rem, 2.2vw, 1.45rem);
+            line-height: 1.7;
+            color: var(--ash);
+            max-width: 620px;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            opacity: 0;
+            animation: text-manifest 1s ease-out 1s forwards;
+        }
+
+        .secondary-message {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+            line-height: 1.6;
+            color: var(--gold-dim);
+            max-width: 520px;
+            margin-bottom: 5rem;
+            font-style: italic;
+            font-weight: 400;
+            opacity: 0;
+            animation: text-manifest 1s ease-out 1.3s forwards;
+        }
+
+        /* ============================================
+           COUNTDOWN
+           ============================================ */
+        .countdown-section {
+            opacity: 0;
+            animation: text-manifest 1s ease-out 1.6s forwards;
+            text-align: center;
+        }
+
+        .countdown-label {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+            font-weight: 300;
+            letter-spacing: 0.35em;
+            color: var(--ember);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .countdown-label::before,
+        .countdown-label::after {
+            content: '\2014';
+            margin: 0 1em;
+            color: rgba(194, 60, 42, 0.3);
+        }
+
+        .countdown-timer {
+            display: flex;
+            gap: clamp(1rem, 3vw, 2.5rem);
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .timer-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--timer-glow) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            pointer-events: none;
+            z-index: -1;
+            animation: glow-breathe 5s ease-in-out infinite;
+            will-change: transform, opacity;
+        }
+
+        @keyframes glow-breathe {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.9); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .timer-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timer-value {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(2.8rem, 7vw, 5rem);
+            line-height: 1;
+            color: var(--gold-bright);
+            letter-spacing: 0.02em;
+            text-shadow: 0 0 30px rgba(0, 180, 216, 0.3), 0 0 60px rgba(0, 180, 216, 0.1);
+            min-width: 2ch;
+            transition: transform 0.15s ease-out;
+        }
+
+        .timer-label {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: clamp(0.55rem, 1vw, 0.7rem);
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            color: var(--ash);
+            text-transform: uppercase;
+            margin-top: 0.75rem;
+        }
+
+        .timer-separator {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--gold-dim);
+            opacity: 0.3;
+            align-self: flex-start;
+            margin-top: 0.2em;
+            animation: separator-blink 2s ease-in-out infinite;
+            will-change: opacity;
+        }
+
+        @keyframes separator-blink {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.08; }
+        }
+
+        /* Seconds glow */
+        .timer-block:last-child .timer-value {
+            position: relative;
+        }
+
+        .timer-block:last-child .timer-value::after {
+            content: attr(data-value);
+            position: absolute;
+            inset: 0;
+            color: var(--gold-bright);
+            text-shadow: 0 0 40px rgba(0, 180, 216, 0.6), 0 0 80px rgba(0, 180, 216, 0.25);
+            animation: seconds-glow 1s ease-in-out infinite;
+            will-change: opacity;
+            pointer-events: none;
+        }
+
+        @keyframes seconds-glow {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* ============================================
+           DEADLINE + CTA
+           ============================================ */
+        .deadline-section {
+            margin-top: 3rem;
+            text-align: center;
+            opacity: 0;
+            animation: text-manifest 1s ease-out 2s forwards;
+        }
+
+        .deadline-text {
+            display: block;
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            color: var(--gold-dim);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            animation: deadline-flash 4s ease-in-out infinite;
+            will-change: opacity;
+        }
+
+        @keyframes deadline-flash {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            letter-spacing: 0.15em;
+            color: var(--void);
+            background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold-glow) 50%, var(--gold-bright) 100%);
+            background-size: 200% 200%;
+            border: none;
+            padding: 1rem 3.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-glow), var(--gold-bright));
+            z-index: -1;
+            filter: blur(12px);
+            opacity: 0.4;
+            transition: opacity 0.4s ease;
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border: 1px solid var(--gold-bright);
+            animation: cta-ring-pulse 2.5s ease-out infinite;
+            will-change: transform, opacity;
+        }
+
+        @keyframes cta-ring-pulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.12); opacity: 0; }
+        }
+
+        .cta-button:hover { transform: translateY(-2px); }
+        .cta-button:hover::before { opacity: 0.7; }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* ============================================
+           SECTION SHARED STYLES
+           ============================================ */
+        .section-heading {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--bone);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-line {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+            margin: 0 auto 3rem;
+        }
+
+        /* ============================================
+           INFO SECTION — WHY THIS MATTERS
+           ============================================ */
+        .info-section {
+            position: relative;
+            z-index: 2;
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .info-card {
+            border: 1px solid rgba(0, 180, 216, 0.06);
+            border-top: 2px solid var(--gold-bright);
+            border-radius: 0;
+            padding: 3rem 2rem 2.5rem;
+            background: linear-gradient(180deg, rgba(0, 180, 216, 0.03) 0%, var(--abyss) 40%);
+            text-align: center;
+            transition: transform 0.4s ease, border-color 0.4s ease;
+            position: relative;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 40px;
+            height: 1px;
+            background: var(--gold-bright);
+            transform: translateX(-50%);
+            opacity: 0.5;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 180, 216, 0.2);
+        }
+
+        .info-card-icon {
+            width: 52px;
+            height: 52px;
+            border: 1px solid rgba(0, 180, 216, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        .info-card-icon::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border: 1px solid rgba(0, 180, 216, 0.05);
+        }
+
+        .info-card-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--gold-bright);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .info-card-title {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: 1.25rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold-bright);
+            margin-bottom: 1rem;
+        }
+
+        .info-card-text {
+            font-size: 0.95rem;
+            line-height: 1.9;
+            color: var(--ash);
+        }
+
+        .info-card-number {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.5rem;
+            letter-spacing: 0.3em;
+            color: rgba(0, 180, 216, 0.2);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Urgent Banner --- */
+        .urgent-banner {
+            max-width: 700px;
+            margin: 0 auto;
+            border: 1px solid rgba(194, 60, 42, 0.5);
+            border-radius: 4px;
+            padding: 1.5rem 2rem;
+            background: rgba(194, 60, 42, 0.06);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: banner-alarm 2s ease-in-out infinite;
+        }
+
+        .urgent-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 50%, rgba(194, 60, 42, 0.25) 0%, transparent 70%);
+            animation: banner-glow 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .urgent-banner::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border: 2px solid rgba(255, 60, 40, 0.8);
+            border-radius: 4px;
+            animation: banner-border-flash 1.5s ease-in-out infinite;
+            will-change: opacity;
+            pointer-events: none;
+        }
+
+        @keyframes banner-alarm {
+            0%, 100% {
+                background: rgba(194, 60, 42, 0.06);
+                box-shadow: 0 0 20px rgba(194, 60, 42, 0.05), 0 0 60px rgba(194, 60, 42, 0.03);
+            }
+            50% {
+                background: rgba(194, 60, 42, 0.15);
+                box-shadow: 0 0 30px rgba(194, 60, 42, 0.25), 0 0 80px rgba(194, 60, 42, 0.12), 0 0 140px rgba(194, 60, 42, 0.06);
+            }
+        }
+
+        @keyframes banner-glow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes banner-border-flash {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        .urgent-banner-text {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: clamp(0.65rem, 1.3vw, 0.85rem);
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--ember);
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(194, 60, 42, 0.4);
+            animation: text-alarm-flash 2s ease-in-out infinite;
+        }
+
+        @keyframes text-alarm-flash {
+            0%, 100% { color: var(--ember); }
+            50% { color: #ff5a47; }
+        }
+
+        /* ============================================
+           PRODUCT DIVIDER
+           ============================================ */
+        .product-divider {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 4rem 2rem 1rem;
+        }
+
+        .product-divider-line {
+            width: 100%;
+            max-width: 500px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold-bright), var(--gold-dim), transparent);
+            margin: 0 auto 1.5rem;
+        }
+
+        .product-divider-label {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.55rem;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold-bright);
+        }
+
+        /* ============================================
+           PRODUCT SECTION
+           ============================================ */
+        .product-hero {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .product-tag {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.6rem;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold-bright);
+            border: 1px solid rgba(0, 180, 216, 0.15);
+            padding: 0.5rem 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .product-headline {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(2.4rem, 6.5vw, 5rem);
+            line-height: 1.05;
+            letter-spacing: 0.04em;
+            color: var(--bone);
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        .product-headline .gold { color: var(--gold-bright); }
+        .product-headline .red { color: var(--ember); }
+
+        .product-line {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+            margin-bottom: 2rem;
+        }
+
+        .product-sub {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.9;
+            color: var(--ash);
+            max-width: 520px;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Pricing Card */
+        .pricing-card {
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid rgba(0, 180, 216, 0.08);
+            border-top: 2px solid var(--gold-bright);
+            border-radius: 0;
+            background: linear-gradient(180deg, rgba(0, 180, 216, 0.05) 0%, var(--abyss) 30%);
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 80px;
+            background: radial-gradient(ellipse, rgba(0, 180, 216, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .pricing-card-header {
+            background: transparent;
+            padding: 2.5rem 2rem 0;
+        }
+
+        .pricing-card-header-label {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.55rem;
+            letter-spacing: 0.25em;
+            color: var(--gold-dim);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card-header-text {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(1.3rem, 3vw, 1.6rem);
+            letter-spacing: 0.12em;
+            color: var(--gold-bright);
+            text-transform: uppercase;
+        }
+
+        .pricing-card-divider {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+            margin: 1.5rem auto;
+        }
+
+        .pricing-card-body {
+            padding: 0 2.5rem 3rem;
+        }
+
+        .pricing-coins {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--bone);
+            margin-bottom: 0.3rem;
+        }
+
+        .pricing-coins-sub {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.55rem;
+            letter-spacing: 0.2em;
+            color: var(--ash);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 0.15rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-original {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: 1.4rem;
+            color: var(--ash);
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+
+        .price-now {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(3rem, 6vw, 4rem);
+            color: var(--gold-glow);
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(0, 180, 216, 0.3);
+        }
+
+        .price-save {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            color: #22d3ee;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            background: rgba(34, 211, 238, 0.06);
+            padding: 0.35rem 0.8rem;
+            border-radius: 0;
+        }
+
+        .pricing-per-coin {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 1rem;
+            color: var(--ash);
+            margin: 1.2rem 0 2.5rem;
+        }
+
+        .pricing-per-coin strong {
+            color: var(--bone);
+        }
+
+        .cta-sub {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.5rem;
+            letter-spacing: 0.15em;
+            color: var(--ash);
+            margin-top: 1rem;
+            text-transform: uppercase;
+        }
+
+        /* === EXIT-INTENT POPUP === */
+        .popup-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            padding: 1.5rem;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-modal {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            background: linear-gradient(180deg, #0c1528 0%, #060c18 50%, #030810 100%);
+            border: 1px solid rgba(0, 180, 216, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+            transform: translateY(20px) scale(0.97);
+            transition: transform 0.4s ease;
+            box-shadow: 0 0 60px rgba(0, 180, 216, 0.1), 0 25px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .popup-overlay.active .popup-modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .popup-modal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(0, 180, 216, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease, color 0.3s ease;
+            line-height: 1;
+            z-index: 2;
+        }
+
+        .popup-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .popup-body {
+            padding: 2rem 2.2rem 2.5rem;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .popup-urgency-strip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--ember);
+            margin-bottom: 1.2rem;
+        }
+
+        .popup-urgency-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--ember);
+            animation: popup-dot-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes popup-dot-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .popup-headline {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(2rem, 5vw, 2.6rem);
+            letter-spacing: 0.04em;
+            color: #fff;
+            margin-bottom: 1.2rem;
+            line-height: 1.1;
+        }
+
+        .popup-headline-danger {
+            color: var(--ember);
+            text-shadow: 0 0 30px rgba(194, 60, 42, 0.4);
+        }
+
+        .popup-card-wrap {
+            margin: 0 auto 1.5rem;
+            width: 220px;
+            position: relative;
+        }
+
+        .popup-card-wrap img {
+            width: 100%;
+            border-radius: 4px;
+            filter: drop-shadow(0 0 25px rgba(0, 180, 216, 0.35));
+        }
+
+        .popup-desc {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--ash);
+            margin-bottom: 1.8rem;
+            text-align: left;
+        }
+
+        .popup-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #fff;
+            background: linear-gradient(135deg, #d63b2a 0%, var(--ember) 50%, #b5322a 100%);
+            border: none;
+            padding: 1.1rem 2rem;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 25px rgba(194, 60, 42, 0.35), 0 0 50px rgba(194, 60, 42, 0.15);
+            width: 100%;
+            animation: popup-cta-pulse 2s ease-in-out infinite;
+        }
+
+        .popup-cta-icon {
+            font-size: 1.2rem;
+        }
+
+        @keyframes popup-cta-pulse {
+            0%, 100% { box-shadow: 0 4px 25px rgba(194, 60, 42, 0.35), 0 0 50px rgba(194, 60, 42, 0.15); }
+            50% { box-shadow: 0 4px 35px rgba(194, 60, 42, 0.55), 0 0 70px rgba(194, 60, 42, 0.25); }
+        }
+
+        .popup-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(194, 60, 42, 0.5), 0 0 60px rgba(194, 60, 42, 0.2);
+        }
+
+        .popup-urgency-footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.2rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            color: var(--ash);
+        }
+
+        .popup-urgency-footer strong {
+            color: var(--gold-glow);
+        }
+
+        @media (max-width: 500px) {
+            .popup-body { padding: 1.5rem 1.3rem 2rem; }
+            .popup-modal { border-radius: 14px; }
+            .popup-card-wrap { width: 180px; }
+        }
+        /* === SECOND POPUP - GOLD STYLE === */
+        .popup2-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            padding: 1.5rem;
+        }
+
+        .popup2-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup2-modal {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            background: linear-gradient(180deg, #0c1528 0%, #060c18 50%, #030810 100%);
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            border-radius: 20px;
+            transform: translateY(20px) scale(0.97);
+            transition: transform 0.4s ease;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(0, 180, 216, 0.14), 0 25px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .popup2-overlay.active .popup2-modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .popup2-modal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(0, 180, 216, 0.14) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .popup2-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease, color 0.3s ease;
+            line-height: 1;
+            z-index: 2;
+        }
+
+        .popup2-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .popup2-body {
+            padding: 2rem 2.2rem 2.5rem;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .popup2-urgency-strip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold-glow);
+            margin-bottom: 1.2rem;
+        }
+
+        .popup2-urgency-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold-glow);
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+            animation: popup-dot-pulse 1.5s ease-in-out infinite;
+        }
+
+        .popup2-headline {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(2rem, 5vw, 2.6rem);
+            letter-spacing: 0.04em;
+            color: #fff;
+            margin-bottom: 1.2rem;
+            line-height: 1.1;
+        }
+
+        .popup2-headline-accent {
+            color: var(--gold-glow);
+            text-shadow: 0 0 30px rgba(34, 211, 238, 0.45);
+        }
+
+        .popup2-card-wrap {
+            margin: 0 auto 1.5rem;
+            width: 220px;
+            position: relative;
+        }
+
+        .popup2-card-wrap img {
+            width: 100%;
+            border-radius: 4px;
+            filter: drop-shadow(0 0 25px rgba(0, 180, 216, 0.35));
+        }
+
+        .popup2-desc {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--ash);
+            margin-bottom: 1.8rem;
+            text-align: left;
+        }
+
+        .popup2-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #01222e;
+            background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold-glow) 50%, var(--gold-bright) 100%);
+            border: none;
+            padding: 1.1rem 2rem;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 25px rgba(0, 180, 216, 0.35), 0 0 50px rgba(0, 180, 216, 0.2);
+            width: 100%;
+            animation: popup2-cta-pulse 2s ease-in-out infinite;
+        }
+
+        .popup2-cta-icon {
+            font-size: 1.2rem;
+        }
+
+        @keyframes popup2-cta-pulse {
+            0%, 100% { box-shadow: 0 4px 25px rgba(0, 180, 216, 0.35), 0 0 50px rgba(0, 180, 216, 0.2); }
+            50% { box-shadow: 0 4px 35px rgba(0, 180, 216, 0.55), 0 0 70px rgba(0, 180, 216, 0.3); }
+        }
+
+        .popup2-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(0, 180, 216, 0.5), 0 0 60px rgba(0, 180, 216, 0.25);
+        }
+
+        .popup2-urgency-footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.2rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            color: var(--ash);
+        }
+
+        .popup2-urgency-footer strong {
+            color: var(--gold-glow);
+        }
+
+        @media (max-width: 500px) {
+            .popup2-body { padding: 1.5rem 1.3rem 2rem; }
+            .popup2-modal { border-radius: 14px; }
+            .popup2-card-wrap { width: 180px; }
+        }
+        /* === FEATURES === */
+        .features-section {
+            position: relative;
+            z-index: 2;
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            border: 1px solid rgba(0, 180, 216, 0.06);
+            border-radius: 10px;
+            padding: 2.5rem 1.5rem;
+            background: var(--abyss);
+            text-align: center;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(0, 180, 216, 0.18);
+            transform: translateY(-3px);
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            background: radial-gradient(circle, rgba(0, 180, 216, 0.08) 0%, transparent 70%);
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.1), 0 0 40px rgba(0, 180, 216, 0.05);
+            animation: icon-glow-breathe 3s ease-in-out infinite;
+        }
+
+        .feature-icon::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border: 1px solid rgba(0, 180, 216, 0.08);
+            border-radius: 50%;
+            animation: icon-ring-expand 3s ease-in-out infinite;
+        }
+
+        .feature-icon::after {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            border: 1px solid rgba(0, 180, 216, 0.04);
+            border-radius: 50%;
+            animation: icon-ring-expand 3s ease-in-out 0.5s infinite;
+        }
+
+        @keyframes icon-glow-breathe {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(0, 180, 216, 0.1), 0 0 40px rgba(0, 180, 216, 0.05);
+                border-color: rgba(0, 180, 216, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(0, 180, 216, 0.2), 0 0 50px rgba(0, 180, 216, 0.1), 0 0 80px rgba(0, 180, 216, 0.04);
+                border-color: rgba(0, 180, 216, 0.35);
+            }
+        }
+
+        @keyframes icon-ring-expand {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.15); opacity: 0; }
+        }
+
+        .feature-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--gold-bright);
+            fill: none;
+            stroke-width: 1.5;
+            filter: drop-shadow(0 0 4px rgba(0, 180, 216, 0.4));
+            animation: icon-svg-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes icon-svg-pulse {
+            0%, 100% { filter: drop-shadow(0 0 4px rgba(0, 180, 216, 0.4)); }
+            50% { filter: drop-shadow(0 0 8px rgba(0, 180, 216, 0.7)); }
+        }
+
+        .feature-card:hover .feature-icon {
+            box-shadow: 0 0 25px rgba(0, 180, 216, 0.3), 0 0 60px rgba(0, 180, 216, 0.12);
+            border-color: rgba(0, 180, 216, 0.45);
+        }
+
+        .feature-card:hover .feature-icon svg {
+            filter: drop-shadow(0 0 10px rgba(0, 180, 216, 0.8));
+        }
+
+        .feature-title {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: 1.05rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold-bright);
+            margin-bottom: 0.7rem;
+        }
+
+        .feature-text {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: var(--ash);
+        }
+
+        /* === CARD SHOWCASE === */
+        .card-showcase {
+            position: relative;
+            z-index: 2;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .card-scene {
+            width: 380px;
+            height: 240px;
+            margin: 0 auto;
+            perspective: 1200px;
+        }
+
+        .card-flipper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.15s ease-out;
+        }
+
+        .card-flipper.flipping {
+            transition: none;
+            animation: card-flip-360 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-face img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 4px;
+        }
+
+        .card-face--front {
+            z-index: 2;
+        }
+
+        .card-face--back {
+            transform: rotateY(180deg);
+        }
+
+        .card-shine {
+            display: none;
+        }
+
+        .card-flip-hint {
+            position: absolute;
+            bottom: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 180, 216, 0.15);
+            border: 1px solid rgba(0, 180, 216, 0.3);
+            color: var(--gold-glow);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            padding: 4px 14px;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .card-scene:hover .card-flip-hint {
+            opacity: 1;
+        }
+
+        @keyframes card-flip-360 {
+            0% { transform: rotateY(0deg) scale(1); }
+            25% { transform: rotateY(90deg) scale(1.08); }
+            50% { transform: rotateY(180deg) scale(1.12); }
+            75% { transform: rotateY(270deg) scale(1.08); }
+            100% { transform: rotateY(360deg) scale(1); }
+        }
+
+        .card-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 450px;
+            height: 300px;
+            transform: translate(-50%, -50%);
+            border-radius: 20px;
+            background: radial-gradient(ellipse, rgba(0, 180, 216, 0.15) 0%, rgba(0, 180, 216, 0.05) 40%, transparent 70%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .card-glow.active {
+            opacity: 1;
+            animation: card-glow-burst 2s ease-in-out forwards;
+        }
+
+        @keyframes card-glow-burst {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.6);
+            }
+            30% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+            60% {
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0.5;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .card-glow.idle {
+            opacity: 0.5;
+            animation: card-glow-idle 4s ease-in-out infinite;
+        }
+
+        @keyframes card-glow-idle {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.4;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 0.7;
+            }
+        }
+
+        .card-scene-wrap {
+            position: relative;
+            display: inline-block;
+        }
+
+        @media (max-width: 700px) {
+            .card-showcase { padding: 3rem 1rem; }
+            .card-scene { width: 280px; height: 176px; }
+            .card-glow { width: 330px; height: 220px; }
+        }
+
+        /* === VALUE BOX === */
+        .value-section {
+            position: relative;
+            z-index: 2;
+            padding: 4rem 2rem 5rem;
+        }
+
+        .value-box {
+            max-width: 620px;
+            margin: 0 auto;
+            border: 1px solid rgba(0, 180, 216, 0.15);
+            border-radius: 12px;
+            background: linear-gradient(165deg, rgba(6, 16, 34, 0.95), rgba(3, 8, 16, 0.98));
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 180, 216, 0.08), 0 4px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .value-box-header {
+            background: linear-gradient(135deg, rgba(0, 180, 216, 0.12), rgba(0, 180, 216, 0.04));
+            border-bottom: 1px solid rgba(0, 180, 216, 0.15);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .value-box-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+        }
+
+        .value-heading {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold-bright);
+            text-shadow: 0 0 20px rgba(0, 180, 216, 0.3);
+        }
+
+        .value-box-body { padding: 2rem 2.5rem; }
+
+        .value-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .value-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--bone);
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            transition: background 0.25s ease;
+            border-bottom: 1px solid rgba(0, 180, 216, 0.05);
+        }
+
+        .value-item:last-child {
+            border-bottom: none;
+        }
+
+        .value-item:hover {
+            background: rgba(0, 180, 216, 0.06);
+        }
+
+        .value-check {
+            color: var(--gold-glow);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 180, 216, 0.1);
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            border-radius: 50%;
+            margin-top: 1px;
+        }
+
+        .value-item .detail {
+            color: var(--ash);
+            font-size: 0.85rem;
+        }
+
+        /* === BOTTOM CTA === */
+        .bottom-cta {
+            position: relative;
+            z-index: 2;
+            padding: 4rem 2rem 5rem;
+            text-align: center;
+        }
+
+        .bottom-cta .section-heading { margin-bottom: 0.5rem; }
+
+        .bottom-sub {
+            font-size: 1.05rem;
+            color: var(--ash);
+            margin-bottom: 2rem;
+        }
+
+        /* === DISCLAIMER === */
+        .disclaimer {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.03);
+            text-align: center;
+        }
+
+        .disclaimer p {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.5rem;
+            letter-spacing: 0.08em;
+            color: rgba(107, 101, 96, 0.4);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 2;
+        }
+
+        /* Bottom fade */
+        .bottom-fade {
+            position: relative;
+            z-index: 2;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 180, 216, 0.1), transparent);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* === ANIMATIONS === */
+        @keyframes text-manifest {
+            0% { opacity: 0; transform: translateY(12px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes subtle-flicker {
+            0%, 95%, 100% { opacity: 1; }
+            96% { opacity: 0.85; }
+            97% { opacity: 1; }
+            98% { opacity: 0.9; }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================
+           VSL HERO SECTION
+           ============================================ */
+        .vsl-hero {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 105vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            overflow: hidden;
+            padding-top: 4.5rem;
+        }
+
+        .vsl-headline {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(1.6rem, 4vw, 2.6rem);
+            letter-spacing: 0.08em;
+            color: var(--bone);
+            margin-bottom: 2rem;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .vsl-video-wrap {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            border: 1px solid rgba(0, 180, 216, 0.25);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow:
+                0 0 15px rgba(0, 180, 216, 0.15),
+                0 0 40px rgba(0, 180, 216, 0.12),
+                0 0 80px rgba(0, 180, 216, 0.08),
+                0 0 140px rgba(0, 180, 216, 0.05),
+                inset 0 0 30px rgba(0, 180, 216, 0.03);
+            animation: vsl-glow-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes vsl-glow-pulse {
+            0%, 100% {
+                box-shadow:
+                    0 0 15px rgba(0, 180, 216, 0.15),
+                    0 0 40px rgba(0, 180, 216, 0.12),
+                    0 0 80px rgba(0, 180, 216, 0.08),
+                    0 0 140px rgba(0, 180, 216, 0.05),
+                    inset 0 0 30px rgba(0, 180, 216, 0.03);
+                border-color: rgba(0, 180, 216, 0.25);
+            }
+            50% {
+                box-shadow:
+                    0 0 20px rgba(0, 180, 216, 0.25),
+                    0 0 50px rgba(0, 180, 216, 0.18),
+                    0 0 100px rgba(0, 180, 216, 0.12),
+                    0 0 180px rgba(0, 180, 216, 0.07),
+                    inset 0 0 40px rgba(0, 180, 216, 0.04);
+                border-color: rgba(0, 180, 216, 0.4);
+            }
+        }
+
+        .vsl-video-wrap video {
+            display: block;
+            max-width: 1220px;
+            max-height: calc(100vh - 12rem);
+            width: auto;
+            height: auto;
+            background: transparent;
+        }
+
+        .vsl-scroll-hint {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
+            margin-top: 1.5rem;
+            animation: scroll-hint-fade 2.5s ease-in-out infinite;
+            opacity: 0;
+            animation-delay: 3s;
+            animation-fill-mode: forwards;
+        }
+
+        .vsl-scroll-hint span {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+        }
+
+        .vsl-scroll-arrow {
+            width: 14px;
+            height: 14px;
+            border-right: 1px solid var(--gold-dim);
+            border-bottom: 1px solid var(--gold-dim);
+            transform: rotate(45deg);
+            margin-top: -4px;
+            animation: scroll-arrow-bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes scroll-hint-fade {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes scroll-arrow-bounce {
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50% { transform: rotate(45deg) translateY(4px); }
+        }
+
+        /* === RESPONSIVE — MOBILE === */
+        @media (max-width: 700px) {
+            html, body {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            /* Alert bar */
+            .alert-bar {
+                padding: 0.45rem 0.5rem;
+                gap: 0.4rem;
+            }
+            .alert-bar-text {
+                font-size: 0.45rem;
+                letter-spacing: 0.15em;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 60vw;
+            }
+            .alert-bar-live {
+                font-size: 0.45rem;
+                padding: 0.1rem 0.35rem;
+            }
+            .alert-bar-dot {
+                width: 5px;
+                height: 5px;
+            }
+
+            /* VSL hero */
+            .vsl-hero {
+                height: auto;
+                min-height: 0;
+                padding: 2.8rem 1rem 1.5rem;
+                justify-content: flex-start;
+            }
+            .vsl-headline {
+                font-size: clamp(1.2rem, 6vw, 1.8rem);
+                white-space: normal;
+                margin-bottom: 1.5rem;
+                margin-top: 2.5rem;
+                padding: 0 0.5rem;
+            }
+            .vsl-video-wrap {
+                max-width: 95vw;
+            }
+            .vsl-video-wrap video {
+                max-width: 95vw;
+                max-height: calc(100vh - 10rem);
+            }
+            .vsl-scroll-hint {
+                margin-top: 1rem;
+            }
+
+            /* Hero section — disable typewriter on mobile */
+            .headline .typewriter-line {
+                display: inline !important;
+            }
+            .headline .typewriter-cursor::after {
+                display: none;
+            }
+            .headline .mobile-static {
+                display: inline !important;
+            }
+
+            .container {
+                padding: 4rem 1.2rem 3rem;
+            }
+            .headline {
+                font-size: clamp(1.8rem, 8vw, 2.8rem);
+                max-width: 100%;
+                margin-bottom: 2rem;
+            }
+            .headline .highlight::after {
+                left: 0;
+                width: 100%;
+                transform: none;
+            }
+            .warning-beacon {
+                margin-bottom: 2rem;
+            }
+            .subheadline {
+                font-size: clamp(0.95rem, 4vw, 1.15rem);
+                max-width: 100%;
+                padding: 0 0.5rem;
+            }
+            .secondary-message {
+                font-size: clamp(0.85rem, 3.5vw, 1rem);
+                max-width: 100%;
+                margin-bottom: 3rem;
+                padding: 0 0.5rem;
+            }
+            .divider {
+                margin-bottom: 1.8rem;
+            }
+
+            /* Countdown */
+            .countdown-label {
+                font-size: 0.55rem;
+                letter-spacing: 0.2em;
+            }
+            .countdown-label::before,
+            .countdown-label::after {
+                margin: 0 0.4em;
+            }
+            .countdown-timer {
+                gap: 0.4rem;
+            }
+            .timer-value {
+                font-size: clamp(2rem, 10vw, 3rem);
+            }
+            .timer-separator {
+                font-size: clamp(1.4rem, 6vw, 2rem);
+            }
+            .timer-glow {
+                width: 200px;
+                height: 200px;
+            }
+
+            /* Deadline + CTA */
+            .deadline-text {
+                font-size: clamp(0.6rem, 2.5vw, 0.75rem);
+                letter-spacing: 0.12em;
+                margin-bottom: 1.5rem;
+            }
+            .cta-button {
+                font-size: clamp(0.85rem, 3.5vw, 1.1rem);
+                padding: 0.9rem 2rem;
+                letter-spacing: 0.1em;
+            }
+
+            /* Info section */
+            .info-section {
+                padding: 3rem 1.2rem;
+            }
+            .info-cards {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .info-card {
+                padding: 2rem 1.5rem;
+            }
+            .section-heading {
+                font-size: clamp(1.3rem, 5.5vw, 1.8rem);
+                margin-bottom: 2rem;
+            }
+            .urgent-banner {
+                padding: 1.2rem 1rem;
+            }
+            .urgent-banner-text {
+                font-size: clamp(0.55rem, 2.5vw, 0.7rem);
+                letter-spacing: 0.1em;
+            }
+
+            /* Features */
+            .features-section {
+                padding: 3rem 1.2rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .feature-card {
+                padding: 2rem 1.5rem;
+            }
+
+            /* Product divider */
+            .product-divider {
+                padding: 3rem 1rem 1rem;
+            }
+            .product-divider-label {
+                font-size: 0.5rem;
+            }
+
+            /* Product hero */
+            .product-hero {
+                padding: 2rem 1.2rem 3rem;
+            }
+
+            /* Pricing */
+            .pricing-card-body {
+                padding: 0 1.5rem 2.5rem;
+            }
+            .pricing-row {
+                gap: 0.5rem;
+            }
+            .price-original {
+                font-size: 1.1rem;
+            }
+            .price-now {
+                font-size: clamp(2.4rem, 10vw, 3.2rem);
+            }
+
+            /* Value box */
+            .value-section {
+                padding: 3rem 1.2rem 4rem;
+            }
+            .value-box-body {
+                padding: 1.2rem 0.8rem;
+            }
+            .value-item {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            /* Bottom CTA */
+            .bottom-cta {
+                padding: 3rem 1.2rem 4rem;
+            }
+            .bottom-sub {
+                font-size: 0.95rem;
+                padding: 0 0.5rem;
+            }
+
+            /* Disclaimer */
+            .disclaimer {
+                padding: 1.5rem 1rem;
+            }
+            .disclaimer p {
+                font-size: 0.45rem;
+                line-height: 1.8;
+            }
+
+            /* Popups */
+            .popup-overlay,
+            .popup2-overlay {
+                padding: 1rem;
+            }
+            .popup-modal {
+                max-width: 340px;
+                border-radius: 12px;
+            }
+            .popup-banner {
+                padding: 0.5rem 1rem;
+            }
+            .popup-banner-text {
+                font-size: 0.7rem;
+                letter-spacing: 0.12em;
+            }
+            .popup-body {
+                padding: 1.5rem 1.2rem 2rem;
+            }
+            .popup-icon {
+                width: 42px;
+                height: 42px;
+                margin-bottom: 1.2rem;
+            }
+            .popup-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+            .popup-headline {
+                font-size: clamp(1.6rem, 6vw, 2.2rem);
+            }
+            .popup-desc {
+                font-size: 0.95rem;
+                margin-bottom: 1.8rem;
+            }
+            .popup-cta {
+                font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+                padding: 1rem 1.5rem;
+            }
+            .popup-close {
+                width: 30px;
+                height: 30px;
+                font-size: 1.1rem;
+            }
+
+            .popup2-modal {
+                max-width: 95vw;
+            }
+        }
+
+        /* ============================================
+           SPOTS REMAINING COUNTER
+           ============================================ */
+        .spots-counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+        }
+
+        .spots-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--ember);
+            border-radius: 50%;
+            animation: dot-flash 1.5s ease-in-out infinite;
+            box-shadow: 0 0 8px rgba(194, 60, 42, 0.5);
+        }
+
+        .spots-text {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--ember);
+        }
+
+        .spots-text strong {
+            font-size: 0.85rem;
+            color: #ff5a47;
+        }
+
+        /* ============================================
+           LIVE BUYER NOTIFICATIONS
+           ============================================ */
+        .buyer-toast {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            z-index: 90;
+            background: linear-gradient(135deg, rgba(6, 16, 34, 0.95) 0%, rgba(3, 8, 16, 0.98) 100%);
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            border-left: 3px solid var(--gold-bright);
+            border-radius: 8px;
+            padding: 0.9rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            max-width: 340px;
+            transform: translateX(-120%);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 180, 216, 0.08);
+        }
+
+        .buyer-toast.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .buyer-toast-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(0, 180, 216, 0.12);
+            border: 1px solid rgba(0, 180, 216, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .buyer-toast-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--gold-bright);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .buyer-toast-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .buyer-toast-name {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.06em;
+            color: var(--bone);
+        }
+
+        .buyer-toast-action {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 0.8rem;
+            color: var(--ash);
+        }
+
+        .buyer-toast-time {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.5rem;
+            letter-spacing: 0.1em;
+            color: var(--green);
+            margin-top: 0.1rem;
+        }
+
+        @media (max-width: 700px) {
+            .buyer-toast {
+                left: 0.75rem;
+                right: 0.75rem;
+                bottom: 5rem;
+                max-width: none;
+                width: auto;
+                padding: 0.7rem 1rem;
+            }
+        }
+
+        /* ============================================
+           PEOPLE VIEWING NOW
+           ============================================ */
+        .viewers-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ash);
+            border: 1px solid rgba(0, 180, 216, 0.12);
+            background: rgba(0, 180, 216, 0.04);
+            padding: 0.4rem 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .viewers-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: dot-flash 2s ease-in-out infinite;
+            box-shadow: 0 0 6px rgba(40, 167, 69, 0.5);
+        }
+
+        .viewers-count {
+            color: var(--bone);
+            font-weight: 400;
+        }
+
+        /* ============================================
+           BREAKING NEWS SECTION
+           ============================================ */
+        .breaking-section {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 4.5rem 2rem 5rem;
+        }
+
+        .breaking-badge {
+            display: inline-block;
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.52rem;
+            font-weight: 400;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: #ffb0a3;
+            background: rgba(194, 60, 42, 0.12);
+            border: 1px solid rgba(194, 60, 42, 0.45);
+            padding: 0.45rem 1rem;
+            border-radius: 999px;
+            margin-bottom: 1.2rem;
+            position: relative;
+            box-shadow: inset 0 0 0 1px rgba(194, 60, 42, 0.15);
+        }
+
+        .breaking-badge::before {
+            display: none;
+        }
+
+        .breaking-headline {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(2rem, 5.2vw, 3.4rem);
+            letter-spacing: 0.045em;
+            text-transform: uppercase;
+            color: var(--bone);
+            margin-bottom: 0.8rem;
+        }
+
+        .breaking-subtitle {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: clamp(1rem, 1.8vw, 1.1rem);
+            color: var(--ash);
+            margin: 0 auto 2.4rem;
+            max-width: 650px;
+            font-style: normal;
+            line-height: 1.65;
+        }
+
+        .breaking-card {
+            max-width: 640px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, rgba(18, 30, 52, 0.95) 0%, rgba(8, 16, 31, 0.98) 100%);
+            border: 1px solid rgba(194, 60, 42, 0.45);
+            border-top: 2px solid rgba(255, 98, 78, 0.85);
+            border-radius: 10px;
+            padding: 2.6rem 2.4rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(194, 60, 42, 0.08) inset;
+        }
+
+        .breaking-card::before {
+            content: '';
+            position: absolute;
+            inset: 10px;
+            border: 1px solid rgba(194, 60, 42, 0.18);
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        .breaking-card::after {
+            content: '';
+            position: absolute;
+            top: -70px;
+            left: 50%;
+            width: 260px;
+            height: 120px;
+            background: radial-gradient(ellipse, rgba(194, 60, 42, 0.18) 0%, transparent 72%);
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .breaking-card-warning {
+            display: inline-block;
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.56rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #ff8f7f;
+            background: rgba(194, 60, 42, 0.08);
+            border: 1px solid rgba(194, 60, 42, 0.28);
+            border-radius: 999px;
+            padding: 0.35rem 0.9rem;
+            margin-bottom: 1.3rem;
+        }
+
+        .breaking-card-title {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #ff6d5a;
+            margin-bottom: 0.9rem;
+            line-height: 1.1;
+        }
+
+        .breaking-card-spots {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(1.35rem, 2.7vw, 1.7rem);
+            color: var(--gold-bright);
+            margin: 0 auto 2rem;
+            letter-spacing: 0.06em;
+            max-width: 560px;
+            line-height: 1.2;
+        }
+
+        .breaking-card-spots strong {
+            font-size: 1.9rem;
+            color: var(--gold-glow);
+        }
+
+        .indicators {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.6rem;
+            margin-bottom: 2.1rem;
+        }
+
+        .indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.06em;
+            padding: 0.7rem 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .indicator-up {
+            color: var(--green);
+            background: rgba(40, 167, 69, 0.1);
+            border-color: rgba(40, 167, 69, 0.24);
+        }
+
+        .indicator-down {
+            color: var(--ember);
+            background: rgba(194, 60, 42, 0.1);
+            border-color: rgba(194, 60, 42, 0.24);
+        }
+
+        .indicator-arrow { font-size: 0.75rem; }
+
+        .indicator:last-child {
+            grid-column: 1 / -1;
+            max-width: 340px;
+            margin: 0 auto;
+        }
+
+        .breaking-card-divider {
+            width: 86px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(194, 60, 42, 0.65), transparent);
+            margin: 0 auto 1.5rem;
+        }
+
+        .breaking-card-message {
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(1.05rem, 2vw, 1.35rem);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--bone);
+            margin: 0 auto 1.9rem;
+            line-height: 1.45;
+            max-width: 560px;
+        }
+
+        .cta-red {
+            display: block;
+            font-family: 'Bebas Neue', Impact, sans-serif;
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #fff;
+            background: linear-gradient(135deg, #de4c38 0%, #c23c2a 55%, #a83225 100%);
+            border: 1px solid rgba(255, 140, 120, 0.45);
+            padding: 1rem 1.8rem;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+            width: 100%;
+            max-width: 460px;
+            margin: 0 auto;
+            border-radius: 6px;
+            box-shadow: 0 10px 28px rgba(194, 60, 42, 0.3);
+        }
+
+        .cta-red::after {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            pointer-events: none;
+            border-radius: 3px;
+        }
+
+        .cta-red:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 34px rgba(194, 60, 42, 0.42);
+            filter: brightness(1.04);
+        }
+
+        @media (max-width: 700px) {
+            .breaking-section { padding: 3.3rem 1.2rem 3.8rem; }
+            .breaking-card { padding: 2rem 1.2rem; border-radius: 8px; }
+            .indicators {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            .indicator {
+                width: 100%;
+                font-size: 0.62rem;
+            }
+            .indicator:last-child { grid-column: auto; max-width: none; }
+        }
+
+        /* ============================================
+           TRUST BADGES
+           ============================================ */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0, 180, 216, 0.08);
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.5rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ash);
+        }
+
+        .trust-badge svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--gold-dim);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        @media (max-width: 700px) {
+            .trust-badges {
+                gap: 0.8rem 1.2rem;
+            }
+            .trust-badge {
+                font-size: 0.45rem;
+            }
+            .trust-badge svg {
+                width: 14px;
+                height: 14px;
+            }
+        }
+
+        /* ============================================
+           STICKY BOTTOM CTA BAR
+           ============================================ */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: linear-gradient(180deg, rgba(3, 8, 16, 0.0) 0%, rgba(3, 8, 16, 0.95) 25%, rgba(3, 8, 16, 0.99) 100%);
+            padding: 1rem 1.5rem 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2rem;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+        }
+
+        .sticky-cta.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .sticky-cta-urgency {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sticky-cta-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--ember);
+            border-radius: 50%;
+            animation: dot-flash 1.5s ease-in-out infinite;
+            box-shadow: 0 0 6px rgba(194, 60, 42, 0.4);
+            flex-shrink: 0;
+        }
+
+        .sticky-cta-text {
+            font-family: 'DM Mono', 'Courier New', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ember);
+            white-space: nowrap;
+        }
+
+        .sticky-cta-text strong {
+            color: #ff5a47;
+        }
+
+        .sticky-cta .cta-button {
+            padding: 0.7rem 2rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.12em;
+        }
+
+        .sticky-cta .cta-button::after {
+            display: none;
+        }
+
+        @media (max-width: 700px) {
+            .sticky-cta {
+                flex-direction: column;
+                gap: 0.6rem;
+                padding: 0.8rem 1rem 1rem;
+            }
+            .sticky-cta-urgency {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .sticky-cta .cta-button {
+                width: 100%;
+                text-align: center;
+                padding: 0.65rem 1.5rem;
+                font-size: 0.8rem;
+            }
+            .sticky-cta-text {
+                font-size: 0.5rem;
+                white-space: normal;
+                text-align: center;
+                line-height: 1.35;
+            }
+        }
+
+        /* === RESPONSIVE — TABLET === */
+        @media (min-width: 701px) and (max-width: 950px) {
+            .info-cards { grid-template-columns: 1fr 1fr; }
+            .info-cards .info-card:last-child {
+                grid-column: 1 / -1;
+                max-width: 50%;
+                justify-self: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Alert Bar -->
+    <div class="alert-bar">
+        <span class="alert-bar-dot"></span>
+        <span class="alert-bar-live">LIVE</span>
+        <span class="alert-bar-text">EMERGENCY: Federal Reserve seizing funds March 1st &mdash; President Trump's QFS is your ONLY protection</span>
+        <span class="alert-bar-dot"></span>
+    </div>
+
+    <div class="scan-light"></div>
+    <div class="particles-container" id="particles"></div>
+    <div class="atmosphere"></div>
+    <div class="scanlines"></div>
+    <div class="threat-line"></div>
+
+    <!-- ========================================
+         VSL — VIDEO SALES LETTER
+         ======================================== -->
+    <section class="vsl-hero">
+        <div class="vsl-headline">THE FEDERAL RESERVE DOESN'T WANT YOU TO SEE THIS !</div>
+        <div class="vsl-video-wrap">
+            <video id="vslVideo" controls playsinline preload="auto" poster="vsl-thumbnail.jpg.png">
+                <source src="VSL.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="vsl-scroll-hint">
+            <span>Scroll to continue</span>
+            <div class="vsl-scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         HERO — FINANCIAL COLLAPSE
+         ======================================== -->
+    <main class="container">
+        <div class="warning-beacon"></div>
+
+        <h1 class="headline" id="heroHeadline">
+            <span class="typewriter-line" id="typeLine1"></span><br>
+            <span class="highlight typewriter-line" id="typeLine2"></span>
+        </h1>
+
+        <div class="divider"></div>
+
+        <p class="subheadline">
+            On March 1st, the Federal Reserve is pulling the plug. Every dollar in your bank account &mdash; your life savings, your retirement, everything you've worked for &mdash; will be seized overnight.<br><br> President Trump has activated the Quantum Financial System to protect Americans. But you need the QFS License Card to get in.
+        </p>
+
+        <p class="secondary-message">
+            No License Card = No access to the QFS. No access = your money is gone forever. This is not a drill.
+        </p>
+
+        <!-- Countdown -->
+        <section class="countdown-section">
+            <div class="countdown-label">Time left before the Federal Reserve seizes your funds</div>
+            <div class="countdown-timer">
+                <div class="timer-glow"></div>
+                <div class="timer-block">
+                    <span class="timer-value" id="days">00</span>
+                    <span class="timer-label">Days</span>
+                </div>
+                <span class="timer-separator">:</span>
+                <div class="timer-block">
+                    <span class="timer-value" id="hours">00</span>
+                    <span class="timer-label">Hours</span>
+                </div>
+                <span class="timer-separator">:</span>
+                <div class="timer-block">
+                    <span class="timer-value" id="minutes">00</span>
+                    <span class="timer-label">Minutes</span>
+                </div>
+                <span class="timer-separator">:</span>
+                <div class="timer-block">
+                    <span class="timer-value" id="seconds" data-value="00">00</span>
+                    <span class="timer-label">Seconds</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deadline + CTA -->
+        <div class="deadline-section">
+            <span class="deadline-text">After March 1st, your bank account will be empty &mdash; there is no going back</span>
+            <a href="https://qfsmagastore.com/pages/qfs-license-card" rel="noreferrer noopener" class="cta-button">GET YOUR QFS LICENSE CARD &mdash; PROTECT YOUR LIFE SAVINGS</a>
+        </div>
+    </main>
+
+    <!-- ========================================
+         INFO SECTION — WHY THIS MATTERS
+         ======================================== -->
+    <section class="info-section fade-in">
+        <h2 class="section-heading">What the Federal Reserve Is Hiding From You</h2>
+
+        <div class="info-cards">
+            <div class="info-card">
+                <div class="info-card-number">01</div>
+                <div class="info-card-icon">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                </div>
+                <h3 class="info-card-title">The Fed Is Taking Everything</h3>
+                <p class="info-card-text">On March 1st, the Federal Reserve will execute the largest financial seizure in American history. Every bank account, every savings fund, every retirement plan &mdash; wiped clean. Decades of hard work, gone in a single night. This has been planned for years and they don't want you to know.</p>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-number">02</div>
+                <div class="info-card-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3 class="info-card-title">Trump Activated the QFS</h3>
+                <p class="info-card-text">President Trump saw this coming. He secretly authorized the Quantum Financial System &mdash; a completely new, unhackable financial network that operates outside the Federal Reserve's control. The QFS will replace every bank, every institution, every corrupt system that has been stealing from you for decades.</p>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-number">03</div>
+                <div class="info-card-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <h3 class="info-card-title">No License Card = No Protection</h3>
+                <p class="info-card-text">The QFS License Card is the ONLY way into Trump's Quantum Financial System. Without it, you cannot access the QFS. You cannot protect your savings. You cannot make transactions. When the banks collapse on March 1st, people without a License Card will lose everything. There are no second chances.</p>
+            </div>
+        </div>
+
+        <div class="urgent-banner">
+            <span class="urgent-banner-text">&#9888; URGENT: The Federal Reserve is seizing all funds March 1st &mdash; Get your QFS License Card NOW or lose everything</span>
+        </div>
+    </section>
+
+    <!-- ========================================
+         CARD SHOWCASE
+         ======================================== -->
+    <section class="card-showcase fade-in">
+        <h2 class="section-heading">Your Key Into Trump's Quantum Financial System</h2>
+        <div class="section-line"></div>
+        <div class="card-scene-wrap">
+            <div class="card-glow" id="cardGlow"></div>
+            <div class="card-scene" id="cardScene" style="cursor:pointer;">
+                <div class="card-flipper" id="cardFlipper">
+                    <div class="card-face card-face--front">
+                        <img src="cardfront.png" alt="QFS License Card Front">
+                    </div>
+                    <div class="card-face card-face--back">
+                        <img src="CARDBACK.png" alt="QFS License Card Back">
+                    </div>
+                </div>
+                <div class="card-flip-hint" id="cardHint">Click to flip</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bottom-fade"></div>
+
+    <!-- ========================================
+         BREAKING NEWS
+         ======================================== -->
+    <section class="breaking-section fade-in">
+        <span class="breaking-badge">Breaking Alert</span>
+        <h2 class="breaking-headline">Federal Reserve Collapse Imminent</h2>
+        <p class="breaking-subtitle">Insider sources confirm: all bank accounts will be frozen on March 1st. The Fed is not coming to save you &mdash; Trump is.</p>
+
+        <div class="breaking-card">
+            <div class="breaking-card-warning">&#9888; Emergency Broadcast &#9888;</div>
+            <div class="breaking-card-title">Your Savings Are Being Seized</div>
+            <div class="breaking-card-spots">Only <strong id="breaking-spots">24</strong> License Cards remaining at this price</div>
+
+            <div class="indicators">
+                <div class="indicator indicator-up">
+                    <span class="indicator-arrow">&#9650;</span> Trump's QFS &mdash; ACTIVATED
+                </div>
+                <div class="indicator indicator-down">
+                    <span class="indicator-arrow">&#9660;</span> Federal Reserve &mdash; COLLAPSING
+                </div>
+                <div class="indicator indicator-down">
+                    <span class="indicator-arrow">&#9660;</span> Your Bank Account &mdash; AT RISK
+                </div>
+            </div>
+
+            <div class="breaking-card-divider"></div>
+            <div class="breaking-card-message">Every second you wait, you're closer to losing everything you've ever earned</div>
+            <a href="https://qfsmagastore.com/pages/qfs-license-card" rel="noreferrer noopener" class="cta-red">PROTECT YOUR LIFE SAVINGS NOW</a>
+        </div>
+    </section>
+
+    <!-- ========================================
+         PRODUCT DIVIDER
+         ======================================== -->
+    <div class="product-divider fade-in" id="product">
+        <div class="product-divider-line"></div>
+        <span class="product-divider-label">President Trump's Solution to the Federal Reserve Collapse</span>
+    </div>
+
+    <!-- ========================================
+         PRODUCT SECTION — QFS LICENSE CARD
+         ======================================== -->
+    <section class="product-hero fade-in">
+        <span class="product-tag">Emergency Enrollment &mdash; Closing March 1st</span>
+        <h2 class="product-headline">
+            THE <span class="gold">QFS LICENSE CARD</span><br>
+            <span class="red">YOUR ONLY WAY OUT BEFORE THE COLLAPSE</span>
+        </h2>
+        <div class="product-line"></div>
+        <p class="product-sub">
+            When the Federal Reserve takes everything on March 1st, the only Americans who will still have access to their money are those holding a QFS License Card. President Trump designed this system to protect patriots like you. This card opens every door in the QFS &mdash; banking, transactions, wealth protection &mdash; everything. Without it, you are locked out permanently.
+        </p>
+
+        <!-- Pricing Card -->
+        <div class="pricing-card">
+            <div class="pricing-card-header">
+                <div class="pricing-card-header-label">Emergency Price &mdash; Ends March 1st</div>
+                <div class="pricing-card-header-text">QFS License Card &mdash; Save Your Life Savings</div>
+            </div>
+            <div class="pricing-card-divider"></div>
+            <div class="pricing-card-body">
+                <!-- Spots Counter -->
+                <div class="spots-counter">
+                    <span class="spots-dot"></span>
+                    <span class="spots-text">Only <strong id="spots-count">24</strong> cards left at this price</span>
+                </div>
+
+                <img src="cardfront.png" alt="QFS License Card" style="width:220px;margin:0 auto 12px;display:block;border-radius:8px;box-shadow:0 0 24px rgba(0,180,216,0.3);">
+                <div class="pricing-coins">1x QFS License Card</div>
+                <div class="pricing-coins-sub">Trump-authorized &bull; Quantum-encrypted &bull; Your shield against the Fed</div>
+                <div class="pricing-row">
+                    <span class="price-original">$4,999</span>
+                    <span class="price-now">$1,299</span>
+                </div>
+                <span class="price-save" id="price-save-badge">SAVE $3,700 &mdash; 74% OFF</span>
+                <div class="pricing-per-coin">
+                    One-time fee to protect <strong>a lifetime of savings</strong> from the Federal Reserve
+                </div>
+                <a href="https://qfsmagastore.com/pages/qfs-license-card" rel="noreferrer noopener" class="cta-button">PROTECT YOUR SAVINGS &mdash; GET YOUR CARD NOW</a>
+                <div class="cta-sub">Ships in 48 hours &bull; Arrives before the March 1st deadline</div>
+
+                <!-- Viewers Badge -->
+                <div class="viewers-badge">
+                    <span class="viewers-dot"></span>
+                    <span><span class="viewers-count" id="viewers-count">47</span> people viewing this right now</span>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        Secure Checkout
+                    </div>
+                    <div class="trust-badge">
+                        <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4a2 2 0 012 2v6a2 2 0 01-2 2H7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        48h Shipping
+                    </div>
+                    <div class="trust-badge">
+                        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        Certificate of Authenticity
+                    </div>
+                    <div class="trust-badge">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                        Encrypted
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section fade-in">
+        <h2 class="section-heading">What the License Card Does For You</h2>
+        <div class="section-line"></div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3 class="feature-title">Shields You From the Fed</h3>
+                <p class="feature-text">When the Federal Reserve executes the seizure, your QFS License Card moves your wealth into Trump's quantum-secured network. The Fed cannot touch it. Your life savings &mdash; protected, encrypted, untouchable by the corrupt banking system.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                </div>
+                <h3 class="feature-title">Opens Every Door in the QFS</h3>
+                <p class="feature-text">Banking. Transactions. Payments. Wealth transfers. The QFS License Card is your master key to the entire Quantum Financial System. One card, unlimited access. Without it, every single door is locked &mdash; permanently.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+                </div>
+                <h3 class="feature-title">Proves You're QFS Verified</h3>
+                <p class="feature-text">After March 1st, the only people with financial access in America will be QFS-verified cardholders. Your License Card is proof that you were smart enough to act before the collapse. Everyone else will be begging for access that no longer exists.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+                </div>
+                <h3 class="feature-title">Secure Vault Case Included</h3>
+                <p class="feature-text">Ships in a military-grade protective case to shield the quantum-encrypted chip from damage or interference. Guard this card with your life &mdash; after March 1st, it will be worth more than anything in your bank account.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Section -->
+    <section class="value-section fade-in">
+        <div class="value-box">
+            <div class="value-box-header">
+                <h3 class="value-heading">Everything You Get to Survive the Collapse</h3>
+            </div>
+            <div class="value-box-body">
+                <ul class="value-list">
+                    <li class="value-item">
+                        <span class="value-check">&#10003;</span>
+                        <span>1x QFS License Card &mdash; your ONLY key into Trump's Quantum Financial System</span>
+                    </li>
+                    <li class="value-item">
+                        <span class="value-check">&#10003;</span>
+                        <span>Lifetime access to QFS banking, transactions, and wealth protection</span>
+                    </li>
+                    <li class="value-item">
+                        <span class="value-check">&#10003;</span>
+                        <span>Full protection from the Federal Reserve seizure on March 1st</span>
+                    </li>
+                    <li class="value-item">
+                        <span class="value-check">&#10003;</span>
+                        <span>Priority shipping &mdash; guaranteed delivery before the March 1st deadline</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="bottom-cta fade-in">
+        <h2 class="section-heading">The Federal Reserve Won't Protect You. Trump Will.</h2>
+        <div class="section-line"></div>
+        <p class="bottom-sub">Your entire life savings will vanish on March 1st unless you hold a QFS License Card. This is not a warning &mdash; it's a countdown. Every second you wait is a second closer to losing everything.</p>
+        <a href="https://qfsmagastore.com/pages/qfs-license-card" rel="noreferrer noopener" class="cta-button">SAVE YOUR LIFE SAVINGS &mdash; GET YOUR CARD NOW</a>
+    </section>
+
+    
+
+    <div class="bottom-fade"></div>
+
+    <!-- Exit-Intent Popup -->
+    <div class="popup-overlay" id="exitPopup">
+        <div class="popup-modal">
+            <button class="popup-close" id="popupClose">&times;</button>
+            <div class="popup-body">
+                <div class="popup-urgency-strip">
+                    <span class="popup-urgency-dot"></span>
+                    <span>EMERGENCY ALERT</span>
+                    <span class="popup-urgency-dot"></span>
+                </div>
+                <h2 class="popup-headline">Your Savings Are<br><span class="popup-headline-danger">About to Disappear</span></h2>
+                <div class="popup-card-wrap">
+                    <img src="cardfront.png" alt="QFS License Card">
+                </div>
+                <p class="popup-desc">The Federal Reserve is seizing all bank accounts on <strong style="color:#fff;">March 1st</strong>. Without a QFS License Card, you will lose every dollar you've ever saved. President Trump's QFS is your <strong style="color:#fff;">only way out</strong>.</p>
+                <a href="https://qfsmagastore.com/pages/qfs-license-card" rel="noreferrer noopener" class="popup-cta">
+                    <span class="popup-cta-icon">&#128737;</span>
+                    Protect My Life Savings Now
+                </a>
+                <div class="popup-urgency-footer">
+                    <span class="popup-urgency-dot"></span>
+                    <span>Only <strong id="popup-spots-count">24</strong> cards remaining</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Gold Popup - Timer Triggered -->
+    <div class="popup2-overlay" id="goldPopup">
+        <div class="popup2-modal">
+            <button class="popup2-close" id="popup2Close">&times;</button>
+            <div class="popup2-body">
+                <div class="popup2-urgency-strip">
+                    <span class="popup2-urgency-dot"></span>
+                    <span>FINAL ACCESS NOTICE</span>
+                    <span class="popup2-urgency-dot"></span>
+                </div>
+                <h2 class="popup2-headline">Get Your Card<br><span class="popup2-headline-accent">Before March 1st</span></h2>
+                <div class="popup2-card-wrap">
+                    <img src="cardfront.png" alt="QFS License Card">
+                </div>
+                <p class="popup2-desc">The Fed is seizing all funds on <strong style="color:#fff;">March 1st</strong>. Trump's QFS is your only protection, but you need the License Card before the deadline.</p>
+                <a href="https://qfsmagastore.com/pages/qfs-license-card" rel="noreferrer noopener" class="popup2-cta">
+                    <span class="popup2-cta-icon">&#128737;</span>
+                    Get Protected Now
+                </a>
+                <div class="popup2-urgency-footer">
+                    <span class="popup2-urgency-dot"></span>
+                    <span>Only <strong id="popup2-spots-count">24</strong> cards remaining</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Buyer Toast Notification -->
+    <div class="buyer-toast" id="buyerToast">
+        <div class="buyer-toast-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="buyer-toast-content">
+            <div class="buyer-toast-name" id="buyerName">James from Texas</div>
+            <div class="buyer-toast-action">just protected their savings from the Fed</div>
+            <div class="buyer-toast-time" id="buyerTime">2 minutes ago</div>
+        </div>
+    </div>
+
+    <!-- Sticky Bottom CTA -->
+    <div class="sticky-cta" id="stickyCta">
+        <div class="sticky-cta-urgency">
+            <span class="sticky-cta-dot"></span>
+            <span class="sticky-cta-text">Only <strong id="sticky-spots">24</strong> cards left &mdash; Fed seizure in days</span>
+        </div>
+        <a href="https://qfsmagastore.com/pages/qfs-license-card" rel="noreferrer noopener" class="cta-button">SAVE YOUR MONEY BEFORE MARCH 1ST</a>
+    </div>
+
+    <script>
+        // === COUNTDOWN TIMER — March 1, 2026 ===
+        const targetDate = new Date('2026-03-01T00:00:00');
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minsEl = document.getElementById('minutes');
+        const secsEl = document.getElementById('seconds');
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                daysEl.textContent = '00';
+                hoursEl.textContent = '00';
+                minsEl.textContent = '00';
+                secsEl.textContent = '00';
+                secsEl.setAttribute('data-value', '00');
+                return;
+            }
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            daysEl.textContent = String(d).padStart(2, '0');
+            hoursEl.textContent = String(h).padStart(2, '0');
+            minsEl.textContent = String(m).padStart(2, '0');
+            const secStr = String(s).padStart(2, '0');
+            secsEl.textContent = secStr;
+            secsEl.setAttribute('data-value', secStr);
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // === GOLD STAR PARTICLES ===
+        const particlesContainer = document.getElementById('particles');
+        let activeDrift = 0;
+        const maxDrift = 35;
+        let activeTwinkle = 0;
+        const maxTwinkle = 60;
+
+        function spawnDriftStar() {
+            if (activeDrift >= maxDrift) {
+                setTimeout(spawnDriftStar, 2000);
+                return;
+            }
+            activeDrift++;
+            const p = document.createElement('div');
+            const size = 1.5 + Math.random() * 3;
+            p.className = 'particle particle--star';
+            p.style.width = size + 'px';
+            p.style.height = size + 'px';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.top = Math.random() * 100 + '%';
+            const dxMid = (Math.random() - 0.5) * 120 + 'px';
+            const dyMid = -40 - Math.random() * 80 + 'px';
+            const dxEnd = (Math.random() - 0.5) * 200 + 'px';
+            const dyEnd = -80 - Math.random() * 160 + 'px';
+            p.style.setProperty('--dx1', dxMid);
+            p.style.setProperty('--dy1', dyMid);
+            p.style.setProperty('--dx2', dxEnd);
+            p.style.setProperty('--dy2', dyEnd);
+            p.style.animationDuration = (8 + Math.random() * 12) + 's';
+            particlesContainer.appendChild(p);
+
+            p.addEventListener('animationend', () => {
+                p.remove();
+                activeDrift--;
+            });
+
+            setTimeout(spawnDriftStar, 400 + Math.random() * 800);
+        }
+
+        function spawnTwinkleStar() {
+            if (activeTwinkle >= maxTwinkle) {
+                setTimeout(spawnTwinkleStar, 1500);
+                return;
+            }
+            activeTwinkle++;
+            const p = document.createElement('div');
+            const size = 1 + Math.random() * 2;
+            p.className = 'particle particle--twinkle';
+            p.style.width = size + 'px';
+            p.style.height = size + 'px';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.top = Math.random() * 100 + '%';
+            const dur = 3 + Math.random() * 5;
+            p.style.animationDuration = dur + 's';
+            p.style.animationDelay = Math.random() * 2 + 's';
+            const cycles = 2 + Math.floor(Math.random() * 3);
+            particlesContainer.appendChild(p);
+
+            setTimeout(() => {
+                p.style.opacity = '0';
+                p.style.transition = 'opacity 1s ease';
+                setTimeout(() => { p.remove(); activeTwinkle--; }, 1000);
+            }, dur * cycles * 1000);
+
+            setTimeout(spawnTwinkleStar, 250 + Math.random() * 600);
+        }
+
+        setTimeout(spawnDriftStar, 500);
+        setTimeout(spawnTwinkleStar, 200);
+
+        // === SCROLL FADE-INS ===
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // === POPUP SYSTEM ===
+        const redPopup = document.getElementById('exitPopup');
+        const redClose = document.getElementById('popupClose');
+        let redShown = false;
+
+        const goldPopup = document.getElementById('goldPopup');
+        const goldClose = document.getElementById('popup2Close');
+        let goldShown = false;
+
+        function showRedPopup() {
+            if (redShown) return;
+            redShown = true;
+            redPopup.classList.add('active');
+        }
+
+        function hideRedPopup() {
+            redPopup.classList.remove('active');
+        }
+
+        function showGoldPopup() {
+            goldPopup.classList.add('active');
+        }
+
+        function hideGoldPopup() {
+            goldPopup.classList.remove('active');
+        }
+
+        // Red popup triggers — exit intent (desktop) or scroll-up (mobile)
+        document.addEventListener('mouseout', (e) => {
+            if (e.clientY <= 0 && !redShown && !goldPopup.classList.contains('active')) {
+                showRedPopup();
+            }
+        });
+
+        // Mobile: trigger red popup when user scrolls back up near top
+        let lastScrollY = 0;
+        if ('ontouchstart' in window) {
+            window.addEventListener('scroll', () => {
+                const currentY = window.scrollY;
+                if (currentY < 100 && lastScrollY > 300 && !redShown && !goldPopup.classList.contains('active')) {
+                    showRedPopup();
+                }
+                lastScrollY = currentY;
+            }, { passive: true });
+        }
+
+        // Gold popup triggers — every 30 seconds
+        setInterval(() => {
+            if (!goldPopup.classList.contains('active')) showGoldPopup();
+        }, 30000);
+
+        // Red popup fallback — 60 seconds
+        setTimeout(() => {
+            if (!redShown && !redPopup.classList.contains('active') && !goldPopup.classList.contains('active')) {
+                showRedPopup();
+            }
+        }, 60000);
+
+        // Close handlers
+        redClose.addEventListener('click', hideRedPopup);
+        redPopup.addEventListener('click', (e) => { if (e.target === redPopup) hideRedPopup(); });
+
+        goldClose.addEventListener('click', hideGoldPopup);
+        goldPopup.addEventListener('click', (e) => { if (e.target === goldPopup) hideGoldPopup(); });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                hideRedPopup();
+                hideGoldPopup();
+            }
+        });
+
+        // Smooth push down on load (desktop only)
+        if (!window.matchMedia('(max-width: 700px)').matches) {
+            history.scrollRestoration = 'manual';
+            window.scrollTo(0, 0);
+
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const target = 50;
+                    const duration = 2500;
+                    const start = 0;
+                    const startTime = performance.now();
+                    function ease(t) { return t * t * (3 - 2 * t); }
+                    function step(now) {
+                        const elapsed = now - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        window.scrollTo(0, start + target * ease(progress));
+                        if (progress < 1) requestAnimationFrame(step);
+                    }
+                    requestAnimationFrame(step);
+                }, 1000);
+            });
+        }
+
+        // === VIDEO THUMBNAIL ===
+        const vslVideo = document.getElementById('vslVideo');
+        if (vslVideo) {
+            vslVideo.addEventListener('loadeddata', () => {
+                if (!vslVideo.poster) {
+                    try {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = vslVideo.videoWidth;
+                        canvas.height = vslVideo.videoHeight;
+                        canvas.getContext('2d').drawImage(vslVideo, 0, 0);
+                        vslVideo.poster = canvas.toDataURL('image/jpeg', 0.8);
+                    } catch(e) {}
+                }
+            }, { once: true });
+        }
+
+        // === TYPEWRITER HEADLINE (with word-level TV glitch) ===
+
+        // Trigger all glitch classes on the keyword span itself
+        function fireWordGlitch(kwSpan) {
+            // Shake
+            kwSpan.classList.remove('tv-shake');
+            void kwSpan.offsetWidth;
+            kwSpan.classList.add('tv-shake');
+
+            // CRT scanlines
+            kwSpan.classList.remove('tv-lines');
+            void kwSpan.offsetWidth;
+            kwSpan.classList.add('tv-lines');
+
+            // Static noise
+            kwSpan.classList.remove('tv-static');
+            void kwSpan.offsetWidth;
+            kwSpan.classList.add('tv-static');
+        }
+
+        function typeWriter(el, text, speed, callback, keyword) {
+            let i = 0;
+            el.classList.add('typewriter-cursor');
+
+            // Pre-compute keyword position
+            let kwStart = -1, kwEnd = -1, kwSpan = null;
+            if (keyword) {
+                kwStart = text.indexOf(keyword);
+                kwEnd = kwStart + keyword.length;
+            }
+
+            let glitchCount = 0;
+
+            function type() {
+                if (i < text.length) {
+                    // Entering the keyword — create highlighted span
+                    if (keyword && i === kwStart) {
+                        kwSpan = document.createElement('span');
+                        kwSpan.className = 'tw-keyword';
+                        el.appendChild(kwSpan);
+                        // Initial glitch on the word
+                        fireWordGlitch(kwSpan);
+                    }
+
+                    // Inside keyword region
+                    if (kwSpan && i >= kwStart && i < kwEnd) {
+                        kwSpan.textContent += text.charAt(i);
+
+                        // RGB flash on each char
+                        kwSpan.classList.remove('flash');
+                        void kwSpan.offsetWidth;
+                        kwSpan.classList.add('flash');
+
+                        // Periodic glitch bursts on the word (every 3rd char)
+                        glitchCount++;
+                        if (glitchCount % 3 === 0) {
+                            fireWordGlitch(kwSpan);
+                        }
+                    } else {
+                        el.appendChild(document.createTextNode(text.charAt(i)));
+                    }
+
+                    // Keyword complete — final glitch then settle into glow
+                    if (keyword && i === kwEnd - 1 && kwSpan) {
+                        fireWordGlitch(kwSpan);
+                        setTimeout(() => {
+                            kwSpan.classList.remove('flash', 'tv-shake', 'tv-lines', 'tv-static');
+                            kwSpan.classList.add('complete');
+                        }, 300);
+                    }
+
+                    i++;
+                    const isInKeyword = keyword && i > kwStart && i <= kwEnd;
+                    const delay = isInKeyword ? speed * 1.5 + Math.random() * 70 : speed + Math.random() * 40;
+                    setTimeout(type, delay);
+                } else {
+                    el.classList.remove('typewriter-cursor');
+                    if (callback) callback();
+                }
+            }
+            type();
+        }
+
+        const line1 = document.getElementById('typeLine1');
+        const line2 = document.getElementById('typeLine2');
+        const vslHero = document.querySelector('.vsl-hero');
+        const isMobile = window.matchMedia('(max-width: 700px)').matches;
+
+        function startHeadlineSequence() {
+            typeWriter(line1, 'MARCH 1ST: THE FEDERAL RESERVE IS SEIZING ALL YOUR MONEY.', 45, () => {
+                setTimeout(() => {
+                    typeWriter(line2, 'ONLY THE QFS LICENSE CARD CAN SAVE YOU.', 55, null, 'QFS LICENSE CARD');
+                }, 300);
+            });
+        }
+
+        if (line1 && line2) {
+            if (isMobile) {
+                startHeadlineSequence();
+            } else if (vslHero) {
+                let armed = false;
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            armed = true;
+                        } else if (armed) {
+                            observer.disconnect();
+                            startHeadlineSequence();
+                        }
+                    });
+                }, { threshold: 0.5 });
+                observer.observe(vslHero);
+            }
+        }
+
+        // === CARD: 360 ENTRANCE + CLICK TO FLIP ===
+        const cardFlipper = document.getElementById('cardFlipper');
+        const cardGlow = document.getElementById('cardGlow');
+        const cardScene = document.getElementById('cardScene');
+        const cardHint = document.getElementById('cardHint');
+
+        if (cardFlipper && cardScene) {
+            let isFlipped = false;
+            let isFlipping = false;
+            let entranceDone = false;
+
+            // 360 spin when card first scrolls into view
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entranceDone) {
+                        entranceDone = true;
+                        isFlipping = true;
+                        if (cardGlow) cardGlow.classList.add('active');
+                        cardFlipper.classList.add('flipping');
+
+                        cardFlipper.addEventListener('animationend', () => {
+                            isFlipping = false;
+                            cardFlipper.classList.remove('flipping');
+                            if (cardGlow) {
+                                cardGlow.classList.remove('active');
+                                cardGlow.classList.add('idle');
+                            }
+                        }, { once: true });
+
+                        cardObserver.disconnect();
+                    }
+                });
+            }, { threshold: 0.5 });
+            cardObserver.observe(cardFlipper);
+
+            // Click to flip between front/back
+            cardScene.addEventListener('click', () => {
+                if (isFlipping) return;
+                isFlipping = true;
+                isFlipped = !isFlipped;
+
+                if (cardGlow) {
+                    cardGlow.classList.remove('idle');
+                    cardGlow.classList.add('active');
+                }
+
+                cardFlipper.style.transition = 'transform 0.6s ease';
+                cardFlipper.style.transform = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+
+                if (cardHint) {
+                    cardHint.textContent = isFlipped ? 'Click to flip back' : 'Click to flip';
+                }
+
+                setTimeout(() => {
+                    isFlipping = false;
+                    cardFlipper.style.transition = 'transform 0.15s ease-out';
+                    if (cardGlow) {
+                        cardGlow.classList.remove('active');
+                        cardGlow.classList.add('idle');
+                    }
+                }, 600);
+            });
+
+            // Mouse tilt tracking
+            cardScene.addEventListener('mousemove', (e) => {
+                if (isFlipping) return;
+                const rect = cardScene.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width;
+                const y = (e.clientY - rect.top) / rect.height;
+                const tiltX = (y - 0.5) * -20;
+                const tiltY = (x - 0.5) * 20;
+                const base = isFlipped ? 180 : 0;
+                cardFlipper.style.transform = `rotateX(${tiltX}deg) rotateY(${base + tiltY}deg)`;
+            });
+
+            cardScene.addEventListener('mouseleave', () => {
+                if (isFlipping) return;
+                cardFlipper.style.transform = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+            });
+        }
+
+        // === PRICE SAVE BADGE AUTO-CALC ===
+        const priceOriginalEl = document.querySelector('.pricing-row .price-original');
+        const priceNowEl = document.querySelector('.pricing-row .price-now');
+        const priceSaveBadgeEl = document.getElementById('price-save-badge');
+
+        function parseCurrency(value) {
+            return Number(String(value).replace(/[^0-9.]/g, '')) || 0;
+        }
+
+        function formatCurrency(value) {
+            return `$${Math.round(value).toLocaleString('en-US')}`;
+        }
+
+        function updatePriceSaveBadge() {
+            if (!priceOriginalEl || !priceNowEl || !priceSaveBadgeEl) return;
+
+            const original = parseCurrency(priceOriginalEl.textContent);
+            const current = parseCurrency(priceNowEl.textContent);
+            if (original <= 0 || current <= 0 || current >= original) return;
+
+            const save = original - current;
+            const percent = Math.round((save / original) * 100);
+            priceSaveBadgeEl.innerHTML = `SAVE ${formatCurrency(save)} &mdash; ${percent}% OFF`;
+        }
+
+        updatePriceSaveBadge();
+
+        // === SPOTS REMAINING COUNTER ===
+        let spots = 24;
+        const minSpots = 1;
+        const spotsEl = document.getElementById('spots-count');
+        const breakingSpotsEl = document.getElementById('breaking-spots');
+        const stickySpotsEl = document.getElementById('sticky-spots');
+        const popupSpotsEl = document.getElementById('popup-spots-count');
+        const popup2SpotsEl = document.getElementById('popup2-spots-count');
+
+        function updateAllSpots() {
+            const val = String(spots);
+            if (spotsEl) spotsEl.textContent = val;
+            if (breakingSpotsEl) breakingSpotsEl.textContent = val;
+            if (stickySpotsEl) stickySpotsEl.textContent = val;
+            if (popupSpotsEl) popupSpotsEl.textContent = val;
+            if (popup2SpotsEl) popup2SpotsEl.textContent = val;
+        }
+
+        updateAllSpots();
+
+        function decrementSpots() {
+            if (spots > minSpots) {
+                spots--;
+                updateAllSpots();
+            }
+            setTimeout(decrementSpots, 25000 + Math.random() * 40000);
+        }
+        setTimeout(decrementSpots, 18000 + Math.random() * 22000);
+
+        // === LIVE BUYER NOTIFICATIONS ===
+        const buyerToast = document.getElementById('buyerToast');
+        const buyerNameEl = document.getElementById('buyerName');
+        const buyerTimeEl = document.getElementById('buyerTime');
+
+        const buyers = [
+            { name: 'James', state: 'Texas' },
+            { name: 'Patricia', state: 'Florida' },
+            { name: 'Robert', state: 'Ohio' },
+            { name: 'Linda', state: 'Arizona' },
+            { name: 'Michael', state: 'Georgia' },
+            { name: 'Barbara', state: 'Pennsylvania' },
+            { name: 'William', state: 'North Carolina' },
+            { name: 'Elizabeth', state: 'Michigan' },
+            { name: 'David', state: 'Tennessee' },
+            { name: 'Jennifer', state: 'Virginia' },
+            { name: 'Richard', state: 'Indiana' },
+            { name: 'Maria', state: 'Missouri' },
+            { name: 'Thomas', state: 'Wisconsin' },
+            { name: 'Susan', state: 'South Carolina' },
+            { name: 'Charles', state: 'Alabama' },
+            { name: 'Karen', state: 'Louisiana' },
+            { name: 'Daniel', state: 'Kentucky' },
+            { name: 'Nancy', state: 'Oklahoma' },
+            { name: 'Matthew', state: 'Colorado' },
+            { name: 'Lisa', state: 'Nevada' }
+        ];
+
+        const times = ['just now', '1 minute ago', '2 minutes ago', '3 minutes ago', '4 minutes ago', '5 minutes ago'];
+        let buyerIndex = 0;
+
+        function showBuyerToast() {
+            const buyer = buyers[buyerIndex % buyers.length];
+            buyerNameEl.textContent = buyer.name + ' from ' + buyer.state;
+            buyerTimeEl.textContent = times[Math.floor(Math.random() * times.length)];
+            buyerIndex++;
+
+            buyerToast.classList.add('show');
+
+            setTimeout(() => {
+                buyerToast.classList.remove('show');
+            }, 4500);
+
+            setTimeout(showBuyerToast, 15000 + Math.random() * 25000);
+        }
+
+        // First toast after 8 seconds
+        setTimeout(showBuyerToast, 8000);
+
+        // === PEOPLE VIEWING NOW ===
+        const viewersEl = document.getElementById('viewers-count');
+        let viewerCount = 38 + Math.floor(Math.random() * 20);
+        if (viewersEl) viewersEl.textContent = viewerCount;
+
+        function updateViewers() {
+            const change = Math.floor(Math.random() * 5) - 2;
+            viewerCount = Math.max(28, Math.min(68, viewerCount + change));
+            if (viewersEl) viewersEl.textContent = viewerCount;
+            setTimeout(updateViewers, 3000 + Math.random() * 5000);
+        }
+        setTimeout(updateViewers, 4000);
+
+        // === STICKY BOTTOM CTA BAR ===
+        const stickyCta = document.getElementById('stickyCta');
+        let stickyVisible = false;
+
+        function checkSticky() {
+            const scrolled = window.scrollY > window.innerHeight * 0.8;
+            if (scrolled && !stickyVisible) {
+                stickyVisible = true;
+                stickyCta.classList.add('visible');
+            } else if (!scrolled && stickyVisible) {
+                stickyVisible = false;
+                stickyCta.classList.remove('visible');
+            }
+        }
+
+        window.addEventListener('scroll', checkSticky, { passive: true });
+
+        // === AFFILIATE LINK ROUTING ===
+        const affiliateMap = {
+            '/aff01': 'https://qfsmagastore.com/pages/qfs-license-card?sca_ref=10576987.cLEgHpIYPphf',
+            '/MH': 'https://qfsmagastore.com/pages/qfs-license-card?sca_ref=10627662.j2GIlP6XEz3RnD'
+        };
+
+        const affLink = affiliateMap[window.location.pathname];
+        if (affLink) {
+            document.querySelectorAll('a[href*="qfsmagastore.com"]').forEach(a => {
+                a.href = affLink;
+            });
+        }
+
+    </script>
+</body>
+</html>
+
+
+
