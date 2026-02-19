@@ -1,0 +1,8 @@
+﻿{
+  "rewrites": [
+    { "source": "/aff01", "destination": "/index.html" },
+    { "source": "/MH", "destination": "/index.html" },
+    { "source": "/PT", "destination": "/index.html" },
+    { "source": "/LM", "destination": "/index.html" }
+  ]
+}
