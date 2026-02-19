@@ -1,4 +1,4 @@
-﻿{
+{
   "rewrites": [
     { "source": "/aff01", "destination": "/index.html" },
     { "source": "/MH", "destination": "/index.html" },
